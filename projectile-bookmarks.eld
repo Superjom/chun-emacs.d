@@ -1,0 +1,1 @@
+("~/OneDrive/Softwares/emacs.d/" "~/.emacs.d/")

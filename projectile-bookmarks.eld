@@ -1,1 +1,1 @@
-("~/OneDrive/Softwares/emacs.d/" "~/.emacs.d/")
+("~/project/chun-emacs.d/" "~/OneDrive/Softwares/emacs.d/" "~/.emacs.d/")

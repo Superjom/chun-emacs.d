@@ -102,7 +102,6 @@
 
 ;(require 'org-latex)
 
-
 (require 'ox-latex)
 ;(unless (boundp 'org-latex-classes)
 ;	(setq org-latex-classes nil))
@@ -114,9 +113,6 @@
 ;(setq org-latex-to-pdf-process
 ;      '("xelatex -interaction nonstopmode %f"
 ;        "xelatex -interaction nonstopmode %f"))
-
-(setq org-latex-to-pdf-process
-      '("xelatex %f"))
 
 ; 缩进
 (setq-default indent-tabs-mode nil)

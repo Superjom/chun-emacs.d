@@ -15,8 +15,8 @@
 (setq evil-operator-state-cursor '("red" hollow))
 
 ;; auto-indent with the return key
-(define-key global-map (kbd "RET") 'newline-and-indent)
+;(define-key global-map (kbd "RET") 'newline-and-indent)
 
 ;; show machine paren
-(require 'autopair)
-(autopair-global-mode)
+;(require 'autopair)
+;(autopair-global-mode)

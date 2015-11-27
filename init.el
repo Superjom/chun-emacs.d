@@ -104,6 +104,7 @@ by Prelude.")
 (require 'prelude-core)
 (require 'prelude-mode)
 (require 'prelude-editor)
+(require 'prelude-company)
 (require 'prelude-global-keybindings)
 
 ;; OSX specific settings

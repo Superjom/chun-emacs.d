@@ -1,6 +1,7 @@
 ;;; -*- coding: utf-8 -*-
-(("/Users/baidu/.emacs.d/savefile/recentf" . 1028)
- ("/Users/baidu/.emacs.d/personal/evil.el" . 570)
+(("/Users/baidu/.emacs.d/savefile/recentf" . 1071)
+ ("/Users/baidu/.emacs.d/personal/init.el" . 3450)
+ ("/Users/baidu/.emacs.d/personal/evil.el" . 563)
  ("/Users/baidu/.emacs.d/personal/"
   (dired-filename . "/Users/baidu/.emacs.d/personal/helm.el"))
  ("/Users/baidu/"
@@ -10,7 +11,6 @@
  ("/Users/baidu/OneDrive/Documents/orgnotes/emacs.org" . 204)
  ("/Users/baidu/.emacs.d/elpa/evil-tabs-20150127.1346/evil-tabs-autoloads.el" . 1761)
  ("/Users/baidu/.emacs.d/elpa/elscreen-20151025.1800/elscreen-autoloads.el" . 623)
- ("/Users/baidu/.emacs.d/personal/init.el" . 1719)
  ("/Users/baidu/.vimrc" . 724)
  ("/Users/baidu/.emacs.d/elpa/evil-numbers-20140606.551/"
   (dired-filename . "/Users/baidu/.emacs.d/elpa/evil-numbers-20140606.551/evil-numbers-autoloads.el"))

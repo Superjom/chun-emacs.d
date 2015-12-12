@@ -1,13 +1,13 @@
 ;;; -*- coding: utf-8 -*-
-(("/Applications/Emacs.app/Contents/Resources/lisp/org/org.el.gz" . 96024)
- ("/Users/baidu/OneDrive/Documents/orgnotes/paddle.org" . 575)
- ("/Users/baidu/.emacs.d/personal/"
-  (dired-filename . "/Users/baidu/.emacs.d/personal/init.el"))
- ("/Users/baidu/.emacs.d/personal/init.el" . 950)
- ("/Users/baidu/.emacs.d/personal/chelm.el" . 62)
- ("/Users/baidu/.emacs.d/savefile/recentf" . 1457)
- ("/Users/baidu/OneDrive/Documents/orgnotes/paddle.tex" . 1985)
+(("/Users/baidu/project/ad_mt/"
+  (dired-filename . "/Users/baidu/project/ad_mt/thirds"))
+ ("/Users/baidu/project/ad_mt/thirds/" . 185)
+ ("/Users/baidu/project/ad_mt/thirds/README.org" . 10)
+ ("/Users/baidu/.emacs.d/savefile/recentf" . 2328)
+ ("/Users/baidu/.emacs.d/personal/init.el" . 3450)
  ("/Users/baidu/.emacs.d/personal/evil.el" . 563)
+ ("/Users/baidu/.emacs.d/personal/"
+  (dired-filename . "/Users/baidu/.emacs.d/personal/helm.el"))
  ("/Users/baidu/"
   (dired-filename . "/Users/baidu/.CFUserTextEncoding"))
  ("/Users/baidu/OneDrive/Documents/orgnotes/mt.org" . 468)

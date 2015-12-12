@@ -106,6 +106,7 @@ by Prelude.")
 (require 'prelude-editor)
 (require 'prelude-company)
 (require 'prelude-global-keybindings)
+(require 'prelude-helm-everywhere)
 
 ;; OSX specific settings
 (when (eq system-type 'darwin)

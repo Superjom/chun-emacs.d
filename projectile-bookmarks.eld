@@ -1,1 +1,1 @@
-("~/project/chun-emacs.d/" "~/OneDrive/Softwares/emacs.d/" "~/.emacs.d/")
+("~/project/ad_mt/" "~/project/chun-emacs.d/" "~/Onedrive/Documents/blog/" "~/OneDrive/Documents/blog/" "~/Downloads/qibao/" "~/OneDrive/Softwares/emacs.d/" "~/.emacs.d/")

@@ -165,8 +165,8 @@
 
         ("blog-static"
          :base-directory "~/org/notes/static"
-         :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\img"
-         :publishing-directory "~/org/public_html/"
+         :base-extension "css\\|js\\|png\\|svg\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf\\img"
+         :publishing-directory "~/org/public_html/static"
          :recursive t
          :publishing-function org-publish-attachment
          )
@@ -174,3 +174,5 @@
         ("blog" :components ("blog-notes" "blog-static"))
 
 ))
+
+(require 'ox-beamer)

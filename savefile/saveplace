@@ -1,8 +1,29 @@
 ;;; -*- coding: utf-8 -*-
-(("/Users/baidu/.emacs.d/savefile/recentf" . 2463)
+(("/Users/baidu/org/beamer/rnn.org" . 1275)
+ ("/Users/baidu/.emacs.d/savefile/recentf" . 3288)
+ ("/Users/baidu/org/beamer/rnn.tex" . 1407)
+ ("/Users/baidu/.emacs.d/personal/init.el" . 5361)
+ ("/Users/baidu/org/notes/"
+  (dired-filename . "/Users/baidu/org/notes/2015-12-09-rnn.org"))
+ ("/Users/baidu/org/notes/2015-12-09-rnn.org" . 316)
+ ("/Users/baidu/project/ad_mt/docs/model_status.org" . 9646)
+ ("/Users/baidu/org/notes/rnn2.org" . 696)
+ ("/Users/baidu/org/notes/2015-12-22-rnn1.org" . 654)
+ ("/Users/baidu/org/public_html/2015-12-09-rnn.html" . 15715)
+ ("/Users/baidu/org/public_html/index.html" . 5517)
+ ("/Users/baidu/OneDrive/Documents/orgnotes/paddle.org" . 1088)
+ ("/Users/baidu/org/superjom.github.io/2015-12-09-rnn.html" . 11223)
+ ("/Users/baidu/project/"
+  (dired-filename . "/Users/baidu/project/ad_mt"))
+ ("/Users/baidu/project/ad_mt/"
+  (dired-filename . "/Users/baidu/project/ad_mt/docs"))
+ ("/Users/baidu/project/ad_mt/docs/"
+  (dired-filename . "/Users/baidu/project/ad_mt/docs/model_status.org"))
+ ("/Users/baidu/org/superjom.github.io/index.html" . 5509)
+ ("/Users/baidu/org/superjom.github.io/2015-12-12-bloom-filter.html" . 8737)
+ ("/Users/baidu/org/public_html/2015-12-12-bloom-filter.html" . 8763)
  ("/Users/baidu/OneDrive/Documents/blog/about.org" . 46)
  ("/Users/baidu/Onedrive/Documents/blog/rnn/encoder-decoder.org" . 592)
- ("/Users/baidu/.emacs.d/personal/init.el" . 3978)
  ("/Users/baidu/Onedrive/Documents/blog/index.org" . 44)
  ("/Users/baidu/OneDrive/"
   (dired-filename . "/Users/baidu/OneDrive/Documents"))

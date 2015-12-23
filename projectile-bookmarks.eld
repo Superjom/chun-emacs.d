@@ -1,1 +1,1 @@
-("~/project/ad_mt/" "~/project/chun-emacs.d/" "~/Onedrive/Documents/blog/" "~/OneDrive/Documents/blog/" "~/Downloads/qibao/" "~/OneDrive/Softwares/emacs.d/" "~/.emacs.d/")
+("~/project/chun-emacs.d/" "~/org/notes/" "~/project/ad_mt/" "~/org/superjom.github.io/" "~/Onedrive/Documents/blog/" "~/OneDrive/Documents/blog/" "~/Downloads/qibao/" "~/OneDrive/Softwares/emacs.d/" "~/.emacs.d/")

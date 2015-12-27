@@ -51,14 +51,15 @@
              '("article"
                "\\documentclass[utf8]{ctexart}"
                ("\\section{%s}" . "\\section*{%s}")))
-
+(setq org-src-fontify-natively t)
 ;(setq org-latex-to-pdf-process
 ;      '("xelatex -interaction nonstopmode %f"
 ;        "xelatex -interaction nonstopmode %f"))
 
-(setq org-latex-to-pdf-process
-      '("xelatex %f"))
-
+;;(setq org-latex-to-pdf-process
+      ;;'("xelatex %f"))
+(setq org-latex-pdf-process
+      '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
 (global-hl-line-mode -1)	; 关闭当前高亮
 
@@ -112,6 +113,16 @@
              '("article"
                "\\documentclass[utf8]{ctexart}"
                ("\\section{%s}" . "\\section*{%s}")))
+
+;; 代码语法高亮
+(require 'ox-latex)
+(add-to-list 'org-latex-packages-alist '("" "minted"))
+(setq org-latex-listings 'minted)
+
+(setq org-latex-pdf-process
+      '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+        "xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
 
 ;(setq org-latex-to-pdf-process
 ;      '("xelatex -interaction nonstopmode %f"
@@ -174,5 +185,8 @@
         ("blog" :components ("blog-notes" "blog-static"))
 
 ))
-
+;; 支持beamer
 (require 'ox-beamer)
+
+(setq org-todo-keywords
+      '((sequence "TODO" "DOING" "HANG" "DONE")))

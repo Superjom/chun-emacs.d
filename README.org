@@ -1,6 +1,0 @@
-Just a backup :-)
-
-I have been using Vim for over 6 years, but I am always curious about emacs.
-
-So recently, I installed emacs and evil-mode, and tried a lot about org-mode,
-that's wonderful.

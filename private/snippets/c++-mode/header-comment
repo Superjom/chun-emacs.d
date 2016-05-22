@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: header-comment
+# key: header
+# --
+/*
+ * `(file-name-nondirectory (buffer-file-name (other-buffer)))`
+ * Author: yanchunwei
+ * Date: `(format-time-string "<%Y-%m-%d %a 8:30am>" (current-time))`
+ * Description: $1
+ */
+ $0

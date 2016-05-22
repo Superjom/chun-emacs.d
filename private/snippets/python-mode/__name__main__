@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: __name__main__
+# key: __name
+# --
+if __name__ == '__main__':
+    import argparse
+    args = argparse.ArgumentParser()
+    args.add_argument("--${1:arg}", helper="${2:helper}")
+    args = args.parse_args()
+    if len(sys.argv) == 1:
+       args.print_usage()
+       sys.exit(-1)
+    $0

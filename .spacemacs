@@ -47,8 +47,8 @@ values."
      syntax-checking
      osx
      ;; rss reader
-     elfeed
-     elfeed-org
+     ;;elfeed
+     ;;elfeed-org
      org-octopress-config
      ;;themes-megapack
      ;; version-control
@@ -66,7 +66,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(graphviz-dot-mode)
+   dotspacemacs-additional-packages '(graphviz-dot-mode sr-speedbar)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -451,6 +451,9 @@ you should place your code here."
 
   ;; support dot-mode
   (use-package graphviz-dot-mode :defer t)
+
+  (add-hook 'c++-mode-hook '(lambda ()
+                              ('sr-speedbar-open)))
 
 ) ;; end of custom-config
 

@@ -31,6 +31,8 @@ values."
      python
      chinese
      c-c++
+     cscope
+     ycmd
      latex
      (latex :variables latex-build-command "xelatex")
      (latex :variables latex-enable-auto-fill t)
@@ -41,6 +43,7 @@ values."
             c-c++-default-mode-for-headers 'c++-mode
             c-c++-enable-clang-support t)
      (shell :variables
+            shell-default-term-shell "/bin/zsh"
             shell-default-height 30
             shell-default-position 'bottom)
      ;;spell-checking
@@ -399,10 +402,12 @@ you should place your code here."
   (add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++11")))
   (add-hook 'c++-mode-hook
             (lambda () (setq flycheck-clang-include-path
-                             (list (expand-file-name "/usr/local/include")))))
+                             (list (expand-file-name "/usr/local/include")
+                                   (expand-file-name "~/project/cHasky")
+                                   (expand-file-name "~/project/cHasky/thirdparty/local/include")))))
   ;; shell config
   (setq-default dotspacemacs-configuration-layers
-                '(shell :variables shell-default-shell 'term))
+                '(shell :variables shell-default-shell 'multi-term))
   ;; shutdown flycheck by default
   (setq-default dotspacemacs-configuration-layers
                 '((syntax-checking :variables syntax-checking-enable-by-default nil)))
@@ -453,8 +458,18 @@ you should place your code here."
   (use-package graphviz-dot-mode :defer t)
 
   (add-hook 'c++-mode-hook '(lambda ()
-                              ('sr-speedbar-open)))
+                              (progn
+                                (require 'sr-speedbar)
+                                (evil-leader/set-key "sr" 'sr-speedbar-toggle)
+                                (message "set sr-speedbar key binding"))))
 
+  ;; ycmd configs
+  (set-variable 'ycmd-server-command '("python" "/Users/baidu/Packages/ycmd/ycmd"))
+  (set-variable 'ycmd-global-config "/Users/baidu/.emacs.d/layers/+tools/ycmd/global_conf.py")
+  ;(set-variable 'ycmd-extra-conf-handler "load")
+  (set-variable 'ycmd-extra-conf-whitelist '("~/project/cHasky/*"))
+  (add-hook 'c-mode-hook 'ycmd-mode)
+  (add-hook 'python-mode-hook 'ycmd-mode)
 ) ;; end of custom-config
 
 
@@ -467,7 +482,11 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(elfeed-feeds
    (quote
-    ("http://wenshanren.org/?feed=rss2" "http://feeds.memect.com/ml.rss.xml"))))
+    ("http://wenshanren.org/?feed=rss2" "http://feeds.memect.com/ml.rss.xml")))
+ '(flycheck-clang-include-path
+   (quote
+    ("/usr/local/include" "/Users/baidu/project/cHasky" "/Users/baidu/project/cHasky/thirdparty/local/include" "/Users/baidu/project/cHasky/chasky")))
+ '(sr-speedbar-delete-windows t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

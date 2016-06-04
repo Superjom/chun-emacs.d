@@ -470,6 +470,9 @@ you should place your code here."
   (set-variable 'ycmd-extra-conf-whitelist '("~/project/cHasky/*"))
   (add-hook 'c-mode-hook 'ycmd-mode)
   (add-hook 'python-mode-hook 'ycmd-mode)
+
+  git-magit-status-fullscreen t
+
 ) ;; end of custom-config
 
 

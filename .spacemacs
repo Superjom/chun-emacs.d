@@ -39,6 +39,7 @@ values."
      ;; markdown
      org
      html
+     themes-megapack
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode
             c-c++-enable-clang-support t)
@@ -49,6 +50,7 @@ values."
      ;;spell-checking
      syntax-checking
      osx
+     ;;protobuf
      ;; rss reader
      ;;elfeed
      ;;elfeed-org
@@ -57,11 +59,11 @@ values."
      ;; version-control
 
      ;; file manager
-     ranger
+     ;;ranger
 
      gtags
      ;;smex
-     (ranger :variables ranger-show-preview t)
+     ;;(ranger :variables ranger-show-preview t)
 
      ;;w3m
    )
@@ -69,7 +71,11 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(graphviz-dot-mode sr-speedbar)
+   dotspacemacs-additional-packages '(
+                                      graphviz-dot-mode
+                                      ;;sr-speedbar
+                                      protobuf-mode
+                                      google-c-style)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -125,6 +131,7 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
+                         lush
                          spacemacs-dark
                          solarized-dark
                          dichromacy
@@ -457,21 +464,50 @@ you should place your code here."
   ;; support dot-mode
   (use-package graphviz-dot-mode :defer t)
 
-  (add-hook 'c++-mode-hook '(lambda ()
-                              (progn
-                                (require 'sr-speedbar)
-                                (evil-leader/set-key "sr" 'sr-speedbar-toggle)
-                                (message "set sr-speedbar key binding"))))
+  ;; (add-hook 'c++-mode-hook '(lambda ()
+  ;;                             (progn
+  ;;                               (require 'sr-speedbar)
+  ;;                               (evil-leader/set-key "sr" 'sr-speedbar-toggle)
+  ;;                               (message "set sr-speedbar key binding"))))
 
   ;; ycmd configs
   (set-variable 'ycmd-server-command '("python" "/Users/baidu/Packages/ycmd/ycmd"))
   (set-variable 'ycmd-global-config "/Users/baidu/.emacs.d/layers/+tools/ycmd/global_conf.py")
   ;(set-variable 'ycmd-extra-conf-handler "load")
-  (set-variable 'ycmd-extra-conf-whitelist '("~/project/cHasky/*"))
+  (set-variable 'ycmd-extra-conf-whitelist '("~/project/cHasky/.ycm_extra_conf.py"
+                                             "~/Nodes/fcr020/gtmlib/.ycm_extra_conf.py"))
   (add-hook 'c-mode-hook 'ycmd-mode)
   (add-hook 'python-mode-hook 'ycmd-mode)
 
   git-magit-status-fullscreen t
+  ;; don't work, that's weried
+  ;;chinese-enable-youdao-dict t
+  ;; support gogle c style
+  (add-hook 'c++-mode-hook 'google-set-c-style)
+  (add-hook 'c-mode-hook 'google-set-c-style)
+
+  ;; support org export markdown 
+  ;;(eval-after-load "org"
+    ;;'(require 'ox-md nil t))
+
+  ;; full screen at startup
+  ;;(custom-set-variables
+   ;;'(initial-frame-alist (quote ((fullscreen . maximized)))))
+  (set-frame-parameter nil 'fullscreen 'fullboth)
+
+  (defun insert-date ()
+      "insert date by shell output"
+    (interactive)
+    (insert (shell-command-to-string "date")))
+
+  (defun rsync-push ()
+      "push local file to remote server by using rsync-workflow"
+    (interactive)
+    (progn
+      (shell-command "rsync_push.py")
+      (sit-for 3)
+      (kill-buffer "*Shell Command Output*")
+      ))
 
 ) ;; end of custom-config
 

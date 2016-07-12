@@ -55,6 +55,7 @@ values."
      ;;elfeed
      ;;elfeed-org
      org-octopress-config
+     ;;unicad-config
      ;;themes-megapack
      ;; version-control
 
@@ -301,7 +302,7 @@ you should place your code here."
                 '((auto-completion :variables
                                    auto-completion-enable-help-tooltip)))
 
-  (spacemacs//set-monospaced-font   "Source Code Pro" "Hiragino Sans GB" 13 14)
+  (spacemacs//set-monospaced-font   "Source Code Pro" "Hiragino Sans GB" 13 12)
 
   ;; aganda config
   (setq org-agenda-files (quote ("~/orgnotes/agenda")))
@@ -395,7 +396,9 @@ you should place your code here."
   (add-hook 'c++-mode-hook
             (lambda ()
               (setq company-clang-arguments '("-std=c++11"))
-              (setq flycheck-clang-language-standard "c++11")))
+              (setq flycheck-clang-language-standard "c++11")
+              (setq flycheck-gcc-language-standard "c++11")
+              ))
 
   (setq-default dotspacemacs-configuration-layers
                 '((syntax-checking :variables syntax-checking-enable-tooltips nil)))
@@ -505,9 +508,18 @@ you should place your code here."
     (interactive)
     (progn
       (shell-command "rsync_push.py")
-      (sit-for 3)
+      ;; sleep for a while; just display shell output
+      (sit-for 2)
       (kill-buffer "*Shell Command Output*")
       ))
+
+  ;; enable unicad
+  ;; the unicad package should be downloaded and placed in load-path.
+  (push "/Users/baidu/.emacs.d/private" load-path)
+  (require 'unicad)
+
+  ;; set key-binding for helm-semantic
+  (spacemacs/set-leader-keys-for-major-mode 'c++-mode "sm" 'helm-semantic)
 
 ) ;; end of custom-config
 

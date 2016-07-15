@@ -76,7 +76,9 @@ values."
                                       graphviz-dot-mode
                                       ;;sr-speedbar
                                       protobuf-mode
-                                      google-c-style)
+                                      google-c-style
+                                      elpy
+                                      )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -519,7 +521,16 @@ you should place your code here."
   (require 'unicad)
 
   ;; set key-binding for helm-semantic
-  (spacemacs/set-leader-keys-for-major-mode 'c++-mode "sm" 'helm-semantic)
+  (spacemacs/set-leader-keys "sm" 'helm-semantic)
+  (setq helm-semantic-fuzzy-match t)
+  (setq helm-imenu-fuzzy-match t)
+  (setq helm-locate-fuzzy-match t)
+
+  ;; for python code format
+  ;; too slow!
+  ;; (add-hook 'python-mode-hook 'elpy-enable)
+
+  (spacemacs/set-leader-keys "ru" 'rsync-push)
 
 ) ;; end of custom-config
 

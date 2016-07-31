@@ -352,6 +352,7 @@ you should place your code here."
 
   ;; treat _ as part of a word
   (add-hook 'python-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
+  (add-hook 'c++-mode-hook #'(lambda () (modify-syntax-entry ?_ "w")))
 
   ;; white space
   ;(require 'whitespace)
@@ -480,9 +481,13 @@ you should place your code here."
   (set-variable 'ycmd-global-config "/Users/baidu/.emacs.d/layers/+tools/ycmd/global_conf.py")
   ;(set-variable 'ycmd-extra-conf-handler "load")
   (set-variable 'ycmd-extra-conf-whitelist '("~/project/cHasky/.ycm_extra_conf.py"
-                                             "~/Nodes/fcr020/gtmlib/.ycm_extra_conf.py"))
+                                             "~/Nodes/fcr020/gtmlib/.ycm_extra_conf.py"
+                                             "~/Nodes"
+                                             ))
   (add-hook 'c-mode-hook 'ycmd-mode)
-  (add-hook 'python-mode-hook 'ycmd-mode)
+  ;;(add-hook 'python-mode-hook 'ycmd-mode)
+  ;; (require 'ycmd-eldoc)
+  ;; (add-hook 'ycmd-mode-hook 'ycmd-eldoc-setup)
 
   git-magit-status-fullscreen t
   ;; don't work, that's weried
@@ -532,6 +537,16 @@ you should place your code here."
 
   (spacemacs/set-leader-keys "ru" 'rsync-push)
 
+  (setq org-latex-to-pdf-process '("xelatex %f"))
+
+  (require 'ox-latex)
+  (add-to-list 'org-latex-classes
+               '("beamer"
+                 "\\documentclass\{beamer\}\n"
+                 ("\\section\{%s\}" . "\\section*\{%s\}")
+                 ("\\subsection\{%s\}" . "\\subsection*\{%s\}")
+                 ("\\subsubsection\{%s\}" . "\\subsubsection*\{%s\}")))
+
 ) ;; end of custom-config
 
 
@@ -542,13 +557,14 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(elfeed-feeds
-   (quote
-    ("http://wenshanren.org/?feed=rss2" "http://feeds.memect.com/ml.rss.xml")))
+ ;; '(elfeed-feeds
+ ;;   (quote
+ ;;    ("http://wenshanren.org/?feed=rss2" "http://feeds.memect.com/ml.rss.xml")))
  '(flycheck-clang-include-path
    (quote
     ("/usr/local/include" "/Users/baidu/project/cHasky" "/Users/baidu/project/cHasky/thirdparty/local/include" "/Users/baidu/project/cHasky/chasky")))
- '(sr-speedbar-delete-windows t))
+ ;; '(sr-speedbar-delete-windows t)
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

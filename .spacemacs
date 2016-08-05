@@ -73,11 +73,13 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
-                                      graphviz-dot-mode
+                                      ;; graphviz-dot-mode
                                       ;;sr-speedbar
                                       protobuf-mode
                                       google-c-style
                                       elpy
+                                      switch-window
+                                      ;; tabbar-ruler
                                       )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
@@ -481,8 +483,8 @@ you should place your code here."
   (set-variable 'ycmd-global-config "/Users/baidu/.emacs.d/layers/+tools/ycmd/global_conf.py")
   ;(set-variable 'ycmd-extra-conf-handler "load")
   (set-variable 'ycmd-extra-conf-whitelist '("~/project/cHasky/.ycm_extra_conf.py"
-                                             "~/Nodes/fcr020/gtmlib/.ycm_extra_conf.py"
-                                             "~/Nodes"
+                                             "~/Nodes/gtmlib/.ycm_extra_conf.py"
+                                             "~/Nodes/paddle/.ycm_extra_conf.py"
                                              ))
   (add-hook 'c-mode-hook 'ycmd-mode)
   ;;(add-hook 'python-mode-hook 'ycmd-mode)
@@ -493,8 +495,8 @@ you should place your code here."
   ;; don't work, that's weried
   ;;chinese-enable-youdao-dict t
   ;; support gogle c style
-  (add-hook 'c++-mode-hook 'google-set-c-style)
-  (add-hook 'c-mode-hook 'google-set-c-style)
+  ;; (add-hook 'c++-mode-hook 'google-set-c-style)
+  ;; (add-hook 'c-mode-hook 'google-set-c-style)
 
   ;; support org export markdown 
   ;;(eval-after-load "org"
@@ -547,6 +549,42 @@ you should place your code here."
                  ("\\subsection\{%s\}" . "\\subsection*\{%s\}")
                  ("\\subsubsection\{%s\}" . "\\subsubsection*\{%s\}")))
 
+
+  ;; switch-window
+  (spacemacs/set-leader-keys "oo" 'switch-window)
+
+  ;; change theme automatically
+  (require 'helm-themes)
+  (setq chun/theme-mode "text-theme")
+  (defun chun--change-theme-by-file ()
+    (interactive)
+    (let ((code-theme "tangotango")
+          (text-theme "toxi")
+          (my-buffer-name (buffer-name)))
+      (if (or (string-match "\\.org" my-buffer-name)
+              (string-match "\\.txt" my-buffer-name))
+          ;; load text mode
+          (if (not (string-equal chun/theme-mode "text-theme"))
+              (progn
+                (message "load text theme")
+                ;; (message (format "last mode is %s" chun/theme-mode))
+                (helm-themes--load-theme text-theme)
+                (setq chun/theme-mode "text-theme")
+                )
+            )
+        (if (not (string-equal chun/theme-mode "code-theme"))
+            (progn
+              (message "load code theme")
+              (helm-themes--load-theme code-theme)
+              (setq chun/theme-mode "code-theme")
+              )
+          )
+        )
+      )
+    )
+
+  (add-hook 'after-save-hook (lambda () 'chun--change-theme-by-file))
+
 ) ;; end of custom-config
 
 
@@ -557,14 +595,10 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- ;; '(elfeed-feeds
- ;;   (quote
- ;;    ("http://wenshanren.org/?feed=rss2" "http://feeds.memect.com/ml.rss.xml")))
+ '(c-basic-offset (quote set-from-style))
  '(flycheck-clang-include-path
    (quote
-    ("/usr/local/include" "/Users/baidu/project/cHasky" "/Users/baidu/project/cHasky/thirdparty/local/include" "/Users/baidu/project/cHasky/chasky")))
- ;; '(sr-speedbar-delete-windows t)
- )
+    ("/usr/local/include" "/Users/baidu/project/cHasky" "/Users/baidu/project/cHasky/thirdparty/local/include" "/Users/baidu/project/cHasky/chasky"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

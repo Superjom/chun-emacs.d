@@ -79,6 +79,7 @@ values."
                                       google-c-style
                                       elpy
                                       switch-window
+                                      ;; sublimity
                                       ;; tabbar-ruler
                                       )
    ;; A list of packages and/or extensions that will not be install and loaded.
@@ -554,12 +555,13 @@ you should place your code here."
   (spacemacs/set-leader-keys "oo" 'switch-window)
 
   ;; change theme automatically
+  ;; TODO refactor this
   (require 'helm-themes)
-  (setq chun/theme-mode "text-theme")
+  (setq chun/theme-mode "init-theme")
   (defun chun--change-theme-by-file ()
     (interactive)
     (let ((code-theme "tangotango")
-          (text-theme "toxi")
+          (text-theme "brin")
           (my-buffer-name (buffer-name)))
       (if (or (string-match "\\.org" my-buffer-name)
               (string-match "\\.txt" my-buffer-name))
@@ -583,7 +585,16 @@ you should place your code here."
       )
     )
 
-  (add-hook 'after-save-hook (lambda () 'chun--change-theme-by-file))
+  ;; (add-hook 'find-file-hook 'chun--change-theme-by-file)
+  ;; (add-hook 'c++-mode-hook 'chun--change-theme-by-file)
+  ;; (add-hook 'org-mode-hook 'chun--change-theme-by-file)
+  (spacemacs|define-custom-layout "shell"
+    :binding "+"
+    :body
+    (shell)
+    )
+
+  ;; (require 'sublimity)
 
 ) ;; end of custom-config
 

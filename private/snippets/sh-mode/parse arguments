@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: parse arguments
+# key: parsearg
+# --
+while [[ \$# -gt 1 ]]; do
+key="\$1"
+
+case $key in
+    -${1:p}|--${2:priority})
+    EXTENSION="\$2"
+    shift # past argument
+    ;;
+    --${3:default}
+    DEFAULT=YES
+    ;;
+    *)
+            # unknown option
+    ;;
+esac
+shift # past argument or value
+done

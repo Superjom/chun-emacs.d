@@ -421,6 +421,7 @@ you should place your code here."
             (lambda () (setq flycheck-clang-include-path
                              (list (expand-file-name "/usr/local/include")
                                    (expand-file-name "~/project/cHasky")
+                                   (expand-file-name "~/Nodes/mrlib")
                                    (expand-file-name "~/project/cHasky/thirdparty/local/include")))))
   ;; shell config
   (setq-default dotspacemacs-configuration-layers
@@ -512,7 +513,12 @@ you should place your code here."
   (defun insert-date ()
       "insert date by shell output"
     (interactive)
-    (insert (shell-command-to-string "date")))
+    (insert (shell-command-to-string "echo -n $(date +%Y-%m-%d)")))
+
+  (defun insert-time ()
+    "insert time by shell output"
+    (interactive)
+    (insert (shell-command-to-string "echo -n $(date +%T)")))
 
   (defun rsync-push ()
       "push local file to remote server by using rsync-workflow"
@@ -550,6 +556,17 @@ you should place your code here."
                  ("\\section\{%s\}" . "\\section*\{%s\}")
                  ("\\subsection\{%s\}" . "\\subsection*\{%s\}")
                  ("\\subsubsection\{%s\}" . "\\subsubsection*\{%s\}")))
+
+  (add-to-list 'org-latex-classes
+               '("ctexart"
+                 "\\documentclass[UTF8]{ctexart}"
+                 ("\\section{%s}" . "\\section*{%s}")
+                 ("\\subsection{%s}" . "\\subsection*{%s}")       
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                 ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                 ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))
+               )
 
 
   ;; switch-window
@@ -657,6 +674,7 @@ you should place your code here."
      "/Users/baidu/project/cHasky"
      "/Users/baidu/project/cHasky/thirdparty/local/include"
      "/Users/baidu/project/cHasky/chasky"
+     "/Users/baidu/Nodes/mrlib"
      ;; "/Users/baidu/project/lightkv"
      ))))
 (custom-set-faces

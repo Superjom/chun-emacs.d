@@ -422,6 +422,7 @@ you should place your code here."
                              (list (expand-file-name "/usr/local/include")
                                    (expand-file-name "~/project/cHasky")
                                    (expand-file-name "~/Nodes/mrlib")
+                                   (expand-file-name "~/Nodes/mathlib/include")
                                    (expand-file-name "~/project/cHasky/thirdparty/local/include")))))
   ;; shell config
   (setq-default dotspacemacs-configuration-layers
@@ -547,9 +548,14 @@ you should place your code here."
 
   (spacemacs/set-leader-keys "ru" 'rsync-push)
 
-  (setq org-latex-to-pdf-process '("xelatex %f"))
-
   (require 'ox-latex)
+
+  ;; (setq org-latex-to-pdf-process '("xelatex nonstopmode %f"))
+  (setq org-latex-pdf-process
+        '("xelatex -interaction nonstopmode -output-directory %o %f"
+          "xelatex -interaction nonstopmode -output-directory %o %f"
+          "xelatex -interaction nonstopmode -output-directory %o %f"))
+
   (add-to-list 'org-latex-classes
                '("beamer"
                  "\\documentclass\{beamer\}\n"
@@ -675,6 +681,9 @@ you should place your code here."
      "/Users/baidu/project/cHasky/thirdparty/local/include"
      "/Users/baidu/project/cHasky/chasky"
      "/Users/baidu/Nodes/mrlib"
+     ;; mathlib
+     "/Users/baidu/Nodes/mathlib"
+     "/Users/baidu/Nodes/mathlib/include"
      ;; "/Users/baidu/project/lightkv"
      ))))
 (custom-set-faces

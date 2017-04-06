@@ -398,6 +398,8 @@ you should place your code here."
   (setq org-refile-targets
         '(("~/orgnotes/agenda/work.org" :maxlevel . 3)
           ("~/orgnotes/agenda/life.org" :maxlevel . 3)))
+  ;; set evy
+  (global-set-key (kbd "C-:") 'avy-goto-word-1)
 
   ;; c++
   (add-hook 'c++-mode-hook
@@ -422,7 +424,7 @@ you should place your code here."
                              (list (expand-file-name "/usr/local/include")
                                    (expand-file-name "~/project/cHasky")
                                    (expand-file-name "~/Nodes/mrlib")
-                                   (expand-file-name "~/Nodes/mathlib/include")
+                                   (expand-file-name "~/project/Paddle")
                                    (expand-file-name "~/project/cHasky/thirdparty/local/include")))))
   ;; shell config
   (setq-default dotspacemacs-configuration-layers
@@ -488,7 +490,7 @@ you should place your code here."
   ;(set-variable 'ycmd-extra-conf-handler "load")
   (set-variable 'ycmd-extra-conf-whitelist '("~/project/cHasky/.ycm_extra_conf.py"
                                              "~/Nodes/gtmlib/.ycm_extra_conf.py"
-                                             "~/Nodes/paddle/.ycm_extra_conf.py"
+                                             "~/project/Paddle/.ycm_extra_conf.py"
                                              ))
   (add-hook 'c-mode-hook 'ycmd-mode)
   ;;(add-hook 'python-mode-hook 'ycmd-mode)
@@ -673,19 +675,10 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(c-basic-offset (quote set-from-style))
- '(flycheck-clang-include-path
+ '(custom-safe-themes
    (quote
-    ("/usr/local/include"
-     "/Users/baidu/project/cHasky"
-     "/Users/baidu/project/cHasky/thirdparty/local/include"
-     "/Users/baidu/project/cHasky/chasky"
-     "/Users/baidu/Nodes/mrlib"
-     ;; mathlib
-     "/Users/baidu/Nodes/mathlib"
-     "/Users/baidu/Nodes/mathlib/include"
-     ;; "/Users/baidu/project/lightkv"
-     ))))
+    ("7f369f071fa1e7b7930f376b91db635f6ab06e13a9587f9f66e6f8461e9a41c9" "77c65d672b375c1e07383a9a22c9f9fc1dec34c8774fe8e5b21e76dca06d3b09" default)))
+ '(flycheck-clang-language-standard "c++11"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

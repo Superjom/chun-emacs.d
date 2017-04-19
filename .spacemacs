@@ -403,6 +403,18 @@ you should place your code here."
   ;; set evy
   (global-set-key (kbd "C-:") 'avy-goto-word-1)
 
+  ;; elpy format
+  (defun my-python-mode-before-save-hook ()
+    (when (eq major-mode 'python-mode)
+      (message "calling python before hook")
+      (elpy-format-code)
+      )
+    )
+
+  ;; (add-hook 'before-save-hook #'my-python-mode-before-save-hook)
+  (add-hook 'python-mode-hook
+            (lambda () (add-hook 'before-save-hook my-python-mode-before-save-hook nil 'local)))
+
   ;; c++
   (add-hook 'c++-mode-hook
             (lambda ()
@@ -465,6 +477,7 @@ you should place your code here."
                               ;; keybiding for insert source code
                               (local-set-key (kbd "C-c s")
                                              'org-insert-src-block)))
+
   ;; add support for exectuate c++ in org-mode
   (org-babel-do-load-languages
    'org-babel-load-languages '((C . t) (python . t)))

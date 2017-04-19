@@ -77,6 +77,8 @@ values."
                                       ;;sr-speedbar
                                       protobuf-mode
                                       google-c-style
+                                      ;; plugin to format html css js
+                                      web-beautify
                                       elpy
                                       ;;org-drill
                                       switch-window
@@ -368,9 +370,9 @@ you should place your code here."
   (require 'fill-column-indicator)
   (setq fci-rule-width 2)
   (setq fci-rule-color "orange")
-  (add-hook 'python-mode-hook 'fci-mode)
-  (add-hook 'c++-mode-hook 'fci-mode)
-  (add-hook 'c-mode-hook 'fci-mode)
+  ;; (add-hook 'python-mode-hook 'fci-mode)
+  ;; (add-hook 'c++-mode-hook 'fci-mode)
+  ;; (add-hook 'c-mode-hook 'fci-mode)
 
   ;;(defun fci-mode-override-advice (&rest args))
   ;;(advice-add 'org-html-fontify-code :around
@@ -465,7 +467,7 @@ you should place your code here."
                                              'org-insert-src-block)))
   ;; add support for exectuate c++ in org-mode
   (org-babel-do-load-languages
-   'org-babel-load-languages '((C . t)))
+   'org-babel-load-languages '((C . t) (python . t)))
 
   ;; add config for clang-format
   ;; Bind clang-format-region to C-M-tab in all modes:
@@ -580,6 +582,8 @@ you should place your code here."
   ;; switch-window
   (spacemacs/set-leader-keys "oo" 'switch-window)
 
+  (spacemacs/set-leader-keys "im" 'helm-imenu)
+
   ;; change theme automatically
   ;; TODO refactor this
   (require 'helm-themes)
@@ -665,6 +669,28 @@ you should place your code here."
   (define-key org-mode-map (kbd "<C-drag-n-drop>") 'my-dnd-func)
   (define-key org-mode-map (kbd "<M-drag-n-drop>") 'my-dnd-func)
 
+
+  ;; ----------------------------------------------------------
+  ;; config web-beautify which is a plugin to format web code
+  (require 'web-beautify) ;; Not necessary if using ELPA package
+  (eval-after-load 'js2-mode
+    '(define-key js2-mode-map (kbd "C-c b") 'web-beautify-js))
+  ;; Or if you're using 'js-mode' (a.k.a 'javascript-mode')
+  (eval-after-load 'js
+    '(define-key js-mode-map (kbd "C-c b") 'web-beautify-js))
+
+  (eval-after-load 'json-mode
+    '(define-key json-mode-map (kbd "C-c b") 'web-beautify-js))
+
+  (eval-after-load 'sgml-mode
+    '(define-key html-mode-map (kbd "C-c b") 'web-beautify-html))
+
+  (eval-after-load 'web-mode
+    '(define-key web-mode-map (kbd "C-c b") 'web-beautify-html))
+
+  (eval-after-load 'css-mode
+    '(define-key css-mode-map (kbd "C-c b") 'web-beautify-css))
+
 ) ;; end of custom-config
 
 
@@ -675,10 +701,18 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector
+   ["#000000" "#990000" "#339900" "#666633" "#0000C8" "#9933FF" "#666633" "#000000"])
+ '(c-basic-offset (quote set-from-style))
  '(custom-safe-themes
    (quote
-    ("7f369f071fa1e7b7930f376b91db635f6ab06e13a9587f9f66e6f8461e9a41c9" "77c65d672b375c1e07383a9a22c9f9fc1dec34c8774fe8e5b21e76dca06d3b09" default)))
- '(flycheck-clang-language-standard "c++11"))
+    ("86bd9b4ed2b0aa92f420b770dcf898b194f3976b1bb7ce3aea222b0da709ee53" "00983c5aa8c90c7530682a830cb856ea0ee9c74332c8fbf9e3f1233fedcea7fe" "7f369f071fa1e7b7930f376b91db635f6ab06e13a9587f9f66e6f8461e9a41c9" "77c65d672b375c1e07383a9a22c9f9fc1dec34c8774fe8e5b21e76dca06d3b09" default)))
+ '(fci-rule-color "#151515")
+ '(flycheck-clang-include-path
+   (quote
+    ("/usr/local/include" "/Users/baidu/project/cHasky" "/Users/baidu/project/cHasky/thirdparty/local/include" "/Users/baidu/project/cHasky/chasky" "/Users/baidu/Nodes/mrlib" "/Users/baidu/Nodes/mathlib" "/Users/baidu/Nodes/mathlib/include")))
+ '(flycheck-clang-language-standard "c++11")
+ '(linum-format " %5i "))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

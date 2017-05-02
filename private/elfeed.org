@@ -1,4 +1,0 @@
-* Blogs                                                              :elfeed:
-** Machine Learning                                                     :ml:
-*** http://feeds.memect.com/ml.rss.xml
-

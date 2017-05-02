@@ -1,9 +1,0 @@
-# -*- mode: snippet -*-
-#name : insert-image
-#key : insert-image
-#contributor : Superjom
-# --
-#+CAPTION: $1
-#+NAME: fig:$2
-[[$3]]
-$0

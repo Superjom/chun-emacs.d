@@ -1,7 +1,0 @@
-# -*- mode: snippet -*-
-# name: file-header
-# key: file-header
-# --
-#!/bin/bash
-set -ex
-$0

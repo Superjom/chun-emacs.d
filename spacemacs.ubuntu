@@ -36,11 +36,9 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     yaml
      helm
      auto-completion
      better-defaults
-     ycmd
      emacs-lisp
      git
      markdown
@@ -49,17 +47,18 @@ values."
             shell-default-height 30
             shell-default-position 'bottom)
      ;; spell-checking
+     syntax-checking
+     version-control
      python
-     chinese
      c-c++
      (c-c++ :variables
             c-c++-default-mode-for-headers 'c++-mode
             c-c++-enable-clang-support t)
      cscope
+     ycmd
      html
-     osx
+     ;; osx
      gtags
-     syntax-checking
      version-control
      )
    ;; List of additional packages that will be installed without being
@@ -71,11 +70,11 @@ values."
                                       elpy
                                       google-c-style
                                       protobuf-mode
-                                      mmm-mode
+                                      ;; mmm-mode
                                       dashboard
                                       ag
-                                      counsel
-                                      flx
+                                      ;; counsel
+                                      ;; flx
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -155,7 +154,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 13
+                               :size 12
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -322,14 +321,7 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-
-  (setq configuration-layer--elpa-archives
-        '(("melpa" . "elpa.zilongshanren.com/melpa/")
-          ("org" . "elpa.zilongshanren.com/org/")
-          ("gnu" . "elpa.zilongshanren.com/gnu/")))
-
   )
-
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
@@ -339,6 +331,10 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
 
+  (setq configuration-layer--elpa-archives
+        '(("melpa" . "elpa.zilongshanren.com/melpa/")
+          ("org" . "elpa.zilongshanren.com/org/")
+          ("gnu" . "elpa.zilongshanren.com/gnu/")))
 
   ;; window split control
   (define-key evil-normal-state-map "vs" 'split-window-right-and-focus)
@@ -348,14 +344,9 @@ you should place your code here."
   (define-key evil-normal-state-map "vk" 'evil-window-top)
   (define-key evil-normal-state-map "vj" 'evil-window-bottom)
 
-  (evil-leader/set-key "ag" 'helm-projectile-ag)
+  (setq dashboard-banner-logo-title "Do more && Know more && Be more!")
 
-  ;; Bind clang-format-buffer to tab on the c++-mode only:
-  (add-hook 'c++-mode-hook 'clang-format-bindings)
-  (defun clang-format-bindings ()
-    (define-key c++-mode-map [tab] 'clang-format-buffer))
-
-  (global-linum-mode)
+  (setq org-startup-indented t)
 
   (defun rsync-push ()
     "push local file to remote server by using rsync-workflow"
@@ -367,9 +358,14 @@ you should place your code here."
       (kill-buffer "*Shell Command Output*")
       ))
   (spacemacs/set-leader-keys "ru" 'rsync-push)
+
   ;; enable markdown
   (eval-after-load "org"
     '(require 'ox-md nil t))
+
+  (eval-after-load "org"
+    '(require 'ox-md nil t))
+
   ;; set up for ycmd
   (require 'company-ycmd)
   (company-ycmd-setup)
@@ -380,6 +376,7 @@ you should place your code here."
               (setq company-clang-arguments '("-std=c++11"))
               (setq flycheck-clang-language-standard "c++11")
               (setq flycheck-gcc-language-standard "c++11")
+              (linum-mode)
               ))
 
   (add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++11")))
@@ -388,12 +385,36 @@ you should place your code here."
   (add-hook 'c++-mode-hook (lambda () (setq flycheck-gcc-language-standard "c++11")))
 
   ;; ycmd configs
-  (set-variable 'ycmd-server-command '("python" "/Users/superjom/Packages/ycmd/ycmd"))
-  (set-variable 'ycmd-global-config "/Users/superjom/.emacs.d/layers/+tools/ycmd/global_conf.py")
+  (set-variable 'ycmd-server-command '("python" "/home/superjom/env/ycmd/ycmd"))
+  (set-variable 'ycmd-global-config "/home/superjom/.emacs.d/layers/+tools/ycmd/global_conf.py")
 
-  (setq org-startup-indented t)
+  ;; line no
+  ;; weried, worked in mac, failed in ubuntu
+  ;; (global-linum-mode)
+  (linum-mode)
 
+  ;; bind key for ag
+  (evil-leader/set-key "ag" 'projectile-ag)
+
+  ;; Bind clang-format-buffer to tab on the c++-mode only:
+  (add-hook 'c++-mode-hook 'clang-format-bindings)
+  (defun clang-format-bindings ()
+    (define-key c++-mode-map [tab] 'clang-format-buffer))
+
+  ;; set google c style
+  (add-hook 'c-mode-common-hook 'google-set-c-style)
+  (add-hook 'c-mode-common-hook 'google-make-newline-indent)
+
+  ;; try to fix find-file hang bug
+  (setq helm-echo-input-in-header-line nil)
+
+  (set-variable 'ycmd-extra-conf-whitelist '("/home/superjom/project/paddle2"))
+
+  (setq helm-echo-input-in-header-line nil)
+
+  ;; end
   )
+
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
@@ -404,7 +425,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (flycheck-ycmd company-ycmd ycmd request-deferred let-alist deferred yapfify yaml-mode xterm-color web-mode unfill tagedit smeargle slim-mode shell-pop scss-mode sass-mode reveal-in-osx-finder pytest pyenv-mode py-isort pug-mode pip-requirements pbcopy pangu-spacing osx-trash osx-dictionary orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-download mwim multi-term markdown-toc markdown-mode magit-gitflow live-py-mode less-css-mode launchctl hy-mode htmlize helm-pydoc helm-gtags helm-gitignore helm-css-scss helm-cscope xcscope helm-company helm-c-yasnippet haml-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter gh-md ggtags fuzzy flycheck-pos-tip flycheck find-by-pinyin-dired evil-magit magit magit-popup git-commit with-editor eshell-z eshell-prompt-extras esh-help emmet-mode disaster diff-hl cython-mode company-web web-completion-data company-statistics company-c-headers company-anaconda cmake-mode clang-format chinese-pyim pyim pyim-basedict pos-tip auto-yasnippet anaconda-mode pythonic ace-pinyin pinyinlib ac-ispell auto-complete switch-window protobuf-mode mmm-mode google-c-style elpy yasnippet pyvenv find-file-in-project company dashboard page-break-lines counsel swiper ivy ag ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make projectile pkg-info epl helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil eval-sexp-fu elisp-slime-nav dumb-jump diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))))
+    (define-word alert log4e gntp org-projectile org-category-capture yapfify xterm-color ws-butler winum which-key web-mode volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org tagedit switch-window spaceline smeargle slim-mode shell-pop scss-mode sass-mode reveal-in-osx-finder restart-emacs rainbow-delimiters pytest pyenv-mode py-isort pug-mode protobuf-mode popwin pip-requirements persp-mode pcre2el pbcopy paradox osx-trash osx-dictionary orgit org-present org-pomodoro org-download org-bullets open-junk-file neotree mwim multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum live-py-mode linum-relative link-hint less-css-mode launchctl info+ indent-guide hy-mode hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers hide-comnt help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gtags helm-gitignore helm-flx helm-descbinds helm-css-scss helm-cscope helm-company helm-c-yasnippet helm-ag google-translate google-c-style golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md ggtags fuzzy flycheck-ycmd flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help emmet-mode elpy elisp-slime-nav dumb-jump disaster diff-hl dashboard cython-mode counsel company-ycmd company-web company-statistics company-c-headers company-anaconda column-enforce-mode cmake-mode clean-aindent-mode clang-format bracketed-paste auto-yasnippet auto-highlight-symbol auto-compile aggressive-indent ag adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
